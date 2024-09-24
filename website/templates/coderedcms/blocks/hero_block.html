@@ -1,0 +1,121 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% if not self.fluid %}
+<div class="container">
+{% endif %}
+{% if self.show_form %}
+<div class="action-form-container">
+  <div class="container my-5 action-form">
+  {% include 'coderedcms/blocks/form_block.html' with form_url=self.form_url %}
+  </div>
+</div>
+<style>
+  .action-form {
+    position: absolute;
+    z-index: 100;
+    background: {{self.form_background_color}};
+    width: {{self.form_width}}%;
+    left: {{self.form_left}}%;
+    top: {{self.form_top}}px;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  .action-form-container {
+    position: relative;
+  }
+  @media only screen and (max-width: 540px) {
+    .action-form {
+      position: relative;
+      background: {{self.form_background_color}};
+      width: 100%;
+      left: 0%;
+      padding: 20px;
+      border-radius: 20px;
+      {% if not self.form_mobile_show %} display: none {% endif %} ;
+    }
+  }
+
+  
+</style>
+{% endif %}
+{% image self.background_image max-1600x1600 format-webp as background_image %}
+<style>
+.hero-fg h1, 
+.hero-fg h2, 
+.hero-fg h3, 
+.hero-fg h4, 
+.hero-fg h5, 
+.hero-fg h6 {
+    color: #00b9b9 !important;
+}
+
+.hero-fg{
+  padding: 30px 0px !important;
+}
+</style>
+<div class="hero-fg">
+  <!-- Bootstrap Carousel Start -->
+  <div id="carouselExampleIndicators" style="background-color: rgba(0, 0, 0, 0.781);" class="carousel slide" data-ride="carousel" data-interval="3500">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), #007bff;">
+        <div class="carousel-caption d-md-block">
+          <h1>Moores Rowland Global Growth Gurus</h1>
+          <p>Driving innovation and success across the globe.</p>
+        </div>
+      </div>
+      <div class="carousel-item" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), #28a745;">
+        <div class="carousel-caption d-md-block">
+          <h1>Innovating for Global Success</h1>
+          <p>Our strategies lead the way in achieving growth.</p>
+        </div>
+      </div>
+      <div class="carousel-item" style="background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), #dc3545;">
+        <div class="carousel-caption d-md-block">
+          <h1>Leadership in Growth Strategies</h1>
+          <p>Partnering with you for a successful future.</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+
+  <!-- Updated Responsive CSS -->
+  <style>
+    .carousel-item {
+      height: 430px !important; /* Default height for large screens */
+    }
+
+    @media (max-width: 768px) {
+      .carousel-item {
+        height: 320px !important; /* Smaller height for mobile screens */
+      }
+      
+      .carousel-caption h1 {
+        font-size: 1.5rem; /* Smaller font size for mobile */
+      }
+      
+      .carousel-caption p {
+        font-size: 1rem; /* Smaller font size for mobile */
+      }
+    }
+  </style>
+</div>
+
+
+
+{% if not self.fluid %}
+</div>
+{% endif %}

@@ -1,0 +1,29 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<style>
+  .card-custom-border {
+  border-radius: 50px 0 50px 0; 
+}
+     .custom-border {
+  border-radius: 50px 0 50px 0; 
+  transition: all 0.25s ease;
+  overflow: hidden;
+}
+
+.custom-border:hover {
+  transform: scale(1.025);
+  cursor: pointer;
+  border-radius: 0;
+}
+
+</style>
+<div class="card mb-3 overflow-hidden card-custom-border">
+  {% if page.cover_image %}
+  {% image page.cover_image fill-800x450 format-webp as card_img %}
+  <img class="card-img-top w-100 custom-border" src="{{card_img.url}}" alt="{{card_img.title}}">
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{page.title}}</h5>
+    <p class="card-text">{{page.body_preview}}</p>
+    <a class="card-link" href="{% pageurl page %}" title="{{page.title}}">Read more</a>
+  </div>
+</div>
