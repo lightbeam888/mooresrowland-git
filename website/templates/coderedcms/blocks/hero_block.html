@@ -1,0 +1,230 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% if not self.fluid %}
+<div class="container">
+{% endif %}
+{% if self.show_form %}
+<div class="action-form-container">
+  <div class="container my-5 action-form">
+  {% include 'coderedcms/blocks/form_block.html' with form_url=self.form_url %}
+  </div>
+</div>
+<style>
+  .action-form {
+    position: absolute;
+    z-index: 100;
+    background: {{self.form_background_color}};
+    width: {{self.form_width}}%;
+    left: {{self.form_left}}%;
+    top: {{self.form_top}}px;
+    padding: 20px;
+    border-radius: 20px;
+  }
+  .action-form-container {
+    position: relative;
+  }
+  @media only screen and (max-width: 540px) {
+    .action-form {
+      position: relative;
+      background: {{self.form_background_color}};
+      width: 100%;
+      left: 0%;
+      padding: 20px;
+      border-radius: 20px;
+      {% if not self.form_mobile_show %} display: none {% endif %} ;
+    }
+  }
+</style>
+{% endif %}
+
+{% image self.background_image max-1600x1600 format-webp as background_image %}
+<style>
+.hero-fg h1, 
+.hero-fg h2, 
+.hero-fg h3, 
+.hero-fg h4, 
+.hero-fg h5, 
+.hero-fg h6 {
+    color: #00b9b9 !important;
+}
+
+.hero-fg {
+  padding: 30px 0px !important;
+}
+</style>
+
+<div class="hero-fg">
+  <!-- Custom Carousel Start -->
+  <div class="custom-carousel">
+    <div class="carousel-slide active" style="background-image: url('https://img.pikbest.com/ai/illus_our/20230413/f91327b89b7f0102710e278d4589e6e7.jpg!w700wp');">
+      <div class="overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 0;"></div>
+      <div class="carousel-caption">
+        <h1 style="font-weight: bold;">Moores Rowland Global Growth Gurus</h1>
+        <p style="font-weight: bold;">Driving innovation and success across the globe.</p>
+      </div>
+    </div>
+    <div class="carousel-slide" style="background-image: url('https://png.pngtree.com/background/20230612/original/pngtree-group-of-business-people-in-suits-is-standing-next-to-a-picture-image_3174445.jpg');">
+      <div class="overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 0;"></div>
+      <div class="carousel-caption">
+        <h1 style="font-weight: bold;">Innovating for Global Success</h1>
+        <p style="font-weight: bold;">Our strategies lead the way in achieving growth.</p>
+      </div>
+    </div>
+    <div class="carousel-slide" style="background-image: url('https://i.insider.com/61cb7c0af9047f0018fce06a?width=700');">
+      <div class="overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5); z-index: 0;"></div>
+      <div class="carousel-caption">
+        <h1 style="font-weight: bold;">Leadership in Growth Strategies</h1>
+        <p style="font-weight: bold;">Partnering with you for a successful future.</p>
+      </div>
+    </div>
+    <button class="carousel-control-prev" onclick="prevSlide()">&#10094;</button>
+    <button class="carousel-control-next" onclick="nextSlide()">&#10095;</button>
+  </div>
+  
+  <!-- Carousel Controls -->
+  <div class="carousel-indicators">
+    <span onclick="goToSlide(0)" class="active"></span>
+    <span onclick="goToSlide(1)"></span>
+    <span onclick="goToSlide(2)"></span>
+  </div>
+</div>
+
+<style>
+  .custom-carousel {
+    position: relative;
+    overflow: hidden;
+    height: 480px; /* Reduced height for responsiveness */
+  }
+  
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .carousel-slide.active {
+    opacity: 1;
+  }
+
+  .carousel-caption {
+    color: white;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent; /* Transparent background */
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    padding: 10px; /* Add padding for better touch area */
+  }
+
+  .carousel-control-prev {
+    left: 10px;
+  }
+
+  .carousel-control-next {
+    right: 10px;
+  }
+
+  .carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    display: none;
+  }
+
+  .carousel-indicators span {
+    height: 10px;
+    width: 10px;
+    background-color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .carousel-indicators span.active {
+    background-color: #007bff;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .custom-carousel {
+      height: 300px; /* Smaller height for mobile screens */
+    }
+
+    .carousel-caption h1 {
+      font-size: 1.5rem; /* Smaller font size for mobile */
+    }
+    
+    .carousel-caption p {
+      font-size: 1rem; /* Smaller font size for mobile */
+    }
+  }
+</style>
+
+<script>
+  let currentSlide = 0;
+  let slideInterval;
+
+  function showSlide(index) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.carousel-indicators span');
+    if (index >= slides.length) {
+      currentSlide = 0;
+    } else if (index < 0) {
+      currentSlide = slides.length - 1;
+    } else {
+      currentSlide = index;
+    }
+    slides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      indicators[i].classList.remove('active');
+    });
+    slides[currentSlide].classList.add('active');
+    indicators[currentSlide].classList.add('active');
+  }
+
+  function nextSlide() {
+    showSlide(currentSlide + 1);
+    resetSlideTimer();
+  }
+
+  function prevSlide() {
+    showSlide(currentSlide - 1);
+    resetSlideTimer();
+  }
+
+  function goToSlide(index) {
+    showSlide(index);
+    resetSlideTimer();
+  }
+
+  function resetSlideTimer() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, 5000); // Restart auto-slide
+  }
+
+  // Auto-slide every 5 seconds
+  slideInterval = setInterval(nextSlide, 5000);
+</script>
+
+{% if not self.fluid %}
+</div>
+{% endif %}

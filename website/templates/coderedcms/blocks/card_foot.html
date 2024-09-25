@@ -1,0 +1,41 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<style>
+  .card-custom-border {
+  border-radius: 50px 0 50px 0; 
+  transition: all 0.15s ease;
+  overflow: hidden;
+}
+   .custom-border {
+  border-radius: 50px 0 50px 0; 
+  transition: all 0.15s ease;
+  overflow: hidden;
+}
+
+.custom-border img:hover {
+  transform: scale(1.025);
+  cursor: pointer;
+  border-radius: 0;
+}
+.card-custom-border:hover {
+  border-radius: 0 0 50px 0; 
+}
+.footer-border-radius{
+  border-radius: 0 0 50px 0; 
+}
+</style>
+<div class="card card-custom-border mb-3 {{self.settings.custom_css_class}}" {% if self.settings.custom_id %}id="{{self.settings.custom_id}}"{% endif %}>
+  {% if self.image %}
+  {% image self.image fill-800x450 format-webp as card_img %}
+  <img class="card-img-top w-100 custom-border" src="{{card_img.url}}" alt="{{card_img.title}}">
+  {% endif %}
+  <div class="card-body">
+    {% if self.title %}<h5 class="card-title ">{{self.title}}</h5>{% endif %}
+    {% if self.subtitle %}<h6 class="card-subtitle mb-2 text-muted">{{self.subtitle}}</h6>{% endif %}
+    <div class="card-text">{{self.description}}</div>
+  </div>
+  <div class="card-footer footer-border-radius">
+    {% for button in self.links %}
+    {% include_block button %}
+    {% endfor %}
+  </div>
+</div>
