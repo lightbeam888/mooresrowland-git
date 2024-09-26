@@ -8,11 +8,21 @@
     </a>
   </div>
   {% endif %}
+  <style>
+    .lead{
+      font-size: 1rem;
+    }
+  </style>
   <div class="col">
     <div class="d-flex align-items-center">
       <h4><a href="{{page.url}}">{{page.title}}</a></h4>
       {% if page.content_type.model_class in pagetypes %}<small class="ms-3 badge badge-secondary">{{page.search_name}}</small>{% endif %}
     </div>
+    <style>
+      .lead{
+        font-size: 1rem !important;
+      }
+    </style>
     {% if page.caption %}
     <p class="lead">{{page.caption}}</p>
     {% endif %}

@@ -1,114 +1,148 @@
 {% load wagtailcore_tags wagtailsettings_tags wagtailimages_tags coderedcms_tags i18n custom_tags %}
 {% wagtail_site as site %}
+
 <style>
-  .navbar-custom{
+  /* Navbar adjustments */
+  .navbar-custom {
     background-color: transparent !important;
-    color:black !important;
+    color: #008080 !important;
+    padding: 0.5rem 2rem !important;
   }
 
-</style>
-<nav class="navbar navbar-expand-xl navbar-custom container">
-  <div class="container{% if settings.coderedcms.LayoutSettings.navbar_content_fluid %}-fluid{% endif %} d-flex align-items-center align-items-md-start">
+  /* Logo adjustments */
+  .logo {
+    height: 50px !important;
+    width: auto !important;
+  }
 
-    <style>
-      .logo{
-        height: 60px !important;
-        width: 60px !important;
-      }
-    </style>
-    
-    
+  /* Navbar links adjustments */
+  .navbar-nav .nav-item {
+    margin: 0 !important; /* Remove margin between nav items */
+  }
+
+  .navbar-nav .nav-link {
+    font-size: 0.9rem !important;
+    text-transform: uppercase;
+    color: #008080 !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 0.5rem 0.75rem !important; /* Increased padding for better hover effect */
+  }
+
+  /* Add margin to the last link to space it from the search bar */
+  .navbar-nav .nav-item:last-child .nav-link {
+    margin-right: 1rem !important; /* Space between the last link and search bar */
+  }
+
+  /* Hover effect for navbar links */
+  .navbar-nav .nav-link:hover {
+    background-color: #f0f0f0 !important;
+    color: #333 !important;
+    border-radius: 3px;
+  }
+
+  /* Active link background adjustments */
+  .navbar-nav .nav-item .active {
+    background-color: #f0f0f0 !important;
+    padding: 0.25rem 0.95rem !important;
+    border-radius: 3px;
+  }
+
+  /* Search bar adjustments */
+  .form-control {
+    border-radius: 20px !important;
+    width: 180px !important;
+    margin-left: 0.5rem !important; /* Adjust margin to position close to the last link */
+  }
+
+  .custom-btn-styles {
+    font-size: 0.9rem !important;
+    padding: 0.25rem 0.75rem !important;
+  }
+
+  /* Ensure proper sizing of the navbar toggler */
+  .navbar-toggler {
+    border-color: black !important;
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%280, 0, 0, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+  }
+
+  /* Align navbar content for smaller screens */
+  @media (max-width: 768px) {
+    .navbar-collapse {
+      justify-content: flex-start !important;
+      text-align: left;
+    }
+
+    .navbar-nav {
+      flex-direction: column !important;
+      width: 100% !important;
+    }
+
+    .navbar-nav .nav-item {
+      width: 100% !important;
+      margin: 0; /* Ensure no margin */
+    }
+
+    .navbar-nav .nav-link {
+      padding: 0.75rem 1rem !important; /* Adjust padding for mobile */
+      text-align: left;
+    }
+
+    .navbar-nav .nav-item + .nav-item {
+      margin-top: 0.25rem; /* Adjust spacing between items */
+    }
+
+    .form-control {
+      width: 100% !important;
+    }
+  }
+</style>
+
+<nav class="navbar navbar-expand-xl navbar-custom">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
     <!-- Logo -->
     <a class="navbar-brand" href="/">
       {% if settings.coderedcms.LayoutSettings.logo %}
-      {% image settings.coderedcms.LayoutSettings.logo original format-webp as logo %}
-      <img class="logo" src="{{logo.url}}" alt="{{site.site_name}}">
+        {% image settings.coderedcms.LayoutSettings.logo original as logo %}
+        <img class="logo" src="{{ logo.url }}" alt="{{ site.site_name }}">
       {% else %}
-      {{site.site_name}}
+        {{ site.site_name }}
       {% endif %}
     </a>
 
-    <!-- Navbar toggler for mobile here -->
-     <style>
-      .toggler{
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.3%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-      }
-     </style>
-    <button title="Open Menu" class="navbar-toggler" style="color: black;border: 3px solid rgba(145, 142, 142, 0.644);" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
-      aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon toggler"></span>
+    <!-- Navbar toggler for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
 
-
     <!-- Navbar content -->
-    <div class="collapse navbar-collapse row w-100" id="navbar" style="font-size: large;">
-      <div class="col">
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav me-auto">
         {% if settings.coderedcms.LayoutSettings.site_navbar %}
-        {% get_navbartrans as navbars %}
-        {% for navbar in navbars %}
-        <ul class="navbar-nav" {% if navbar.custom_id %}id="{{navbar.custom_id}}" {% endif %}>
-          {% for item in navbar.menu_items %}
-          {% include_block item with liclass="nav-item m-0" aclass="nav-link" ga_event_category="Navbar" %}
-        {% endfor %}
-        </ul>
-        {% endfor %}
-        {% endif %}
-      </div>
-      <br>
-      
-      <style>
-        .custom-btn-styles{
-          font-size: 1.45rem !important;
-        }
-
-          .custom-btn-styles:hover{
-            color: black !important;
-            cursor: pointer;
-          }
-      </style>
-
-      
-
-<hr style="background-color: transparent;border-color: transparent;">
-      <!-- Search bar here -->
-      <div style="" class="col d-flex  justify-content-end">
-        {% if settings.coderedcms.LayoutSettings.navbar_search %}
-        <form class="d-flex" role="search" action="{% url 'crx_search' %}" method="GET">
-          {% load django_bootstrap5 %}
-          {% get_searchform request as form %}
-          <!-- Smaller search input here -->
-          {% for field in form %}
-              {% bootstrap_field field show_label=False wrapper_class=None success_css_class=None server_side_validation=False field_class="form-control form-control-sm me-2" %}
+          {% get_navbartrans as navbars %}
+          {% for navbar in navbars %}
+            {% for item in navbar.menu_items %}
+              {% include_block item with liclass="nav-item" aclass="nav-link" ga_event_category="Navbar" %}
+            {% endfor %}
           {% endfor %}
-      
-          <!-- search button -->
-          <button class="btn custom-btn-styles" type="submit"  aria-label="Search">
-            {% if settings.coderedcms.LayoutSettings.logo %}
-            <i class="fas fa-search" ></i>
-            {% else %}
-            <img src="path/to/default/logo.png" alt="Search Button" style="height: 30px;">
-            {% endif %}
-          </button>
-        </form>
         {% endif %}
-      </div>
+      </ul>
+
+      <!-- Search bar -->
+      {% if settings.coderedcms.LayoutSettings.navbar_search %}
+      <form class="d-flex" role="search" action="{% url 'crx_search' %}" method="GET">
+        {% load django_bootstrap5 %}
+        {% get_searchform request as form %}
+        {% for field in form %}
+          {% bootstrap_field field show_label=False wrapper_class=None success_css_class=None server_side_validation=False field_class="form-control form-control-sm" %}
+        {% endfor %}
+        <button class="btn custom-btn-styles" type="submit" aria-label="Search">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+      {% endif %}
     </div>
   </div>
 </nav>
-
-
-{# Navbar offset #}
-{% block navbar_offset %}
-{% if settings.coderedcms.LayoutSettings.navbar_fixed %}
-{% if settings.coderedcms.LayoutSettings.logo %}
-<style>
-  .-fixed-img-offset {
-    margin-top: 0px !important;
-  }
-</style>
-<div class="{{settings.coderedcms.LayoutSettings.navbar_format}}-fixed-img-offset {{settings.coderedcms.LayoutSettings.navbar_collapse_mode}}"></div>
-{% else %}
-<div class="{{settings.coderedcms.LayoutSettings.navbar_format}}-fixed-offset {{settings.coderedcms.LayoutSettings.navbar_collapse_mode}}"></div>
-{% endif %}
-{% endif %}
-{% endblock %}
