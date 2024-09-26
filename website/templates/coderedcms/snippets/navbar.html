@@ -69,9 +69,9 @@
 
       
 
-
+<hr style="background-color: transparent;border-color: transparent;">
       <!-- Search bar here -->
-      <div class="col d-flex justify-content-end">
+      <div style="" class="col d-flex  justify-content-end">
         {% if settings.coderedcms.LayoutSettings.navbar_search %}
         <form class="d-flex" role="search" action="{% url 'crx_search' %}" method="GET">
           {% load django_bootstrap5 %}
@@ -80,7 +80,7 @@
           {% for field in form %}
               {% bootstrap_field field show_label=False wrapper_class=None success_css_class=None server_side_validation=False field_class="form-control form-control-sm me-2" %}
           {% endfor %}
-
+      
           <!-- search button -->
           <button class="btn custom-btn-styles" type="submit"  aria-label="Search">
             {% if settings.coderedcms.LayoutSettings.logo %}
@@ -95,6 +95,7 @@
     </div>
   </div>
 </nav>
+
 
 {# Navbar offset #}
 {% block navbar_offset %}

@@ -1,20 +1,19 @@
 .navbar.navbar-custom {
-    background-color: #808 !important;
-    color: #fff !important;
-  }
-  
-  .navbar-custom .navbar-brand {
-    color: #fff;
-  }
-  
-  .navbar-custom .nav-link {
-    color: #ddd;
-  }
-  
-  .navbar-custom .nav-link:hover {
-    color: #fff;
-    background-color: #555;
-  }
-  
-  
-  
+  background-color: transparent !important;
+  color: #008080 !important;
+}
+
+.navbar-custom .navbar-brand {
+  color: #008080 !important;
+}
+
+.navbar-custom .nav-link {
+  color: #008080 !important;
+}
+
+.navbar-custom .nav-link:hover {
+  color: #008080 !important;
+  background-color: #555;
+}
+
+
