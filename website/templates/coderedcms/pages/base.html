@@ -88,8 +88,8 @@
   <link rel="stylesheet" href="{% static 'coderedcms/vendor/bootstrap/dist/css/bootstrap.min.css' %}?v={% coderedcms_version %}">
   {% endif %}
   {% endblock %}
-  <link rel="stylesheet" href="{% static 'css/custom-nav.css' %}?v={{ timestamp }}">
-  <link rel="stylesheet" href="{% static 'website/css/custom-nav.css' %}?v={{ timestamp }}">
+  <link rel="stylesheet" href="{% static 'css/navbar-custom.css' %}?v={{ timestamp }}">
+  <link rel="stylesheet" href="{% static 'website/css/navbar-custom.css' %}?v={{ timestamp }}">
   {% block coderedcms_assets %}
   <link rel="stylesheet" href="{% static 'wagtailfontawesome/css/fontawesome.css' %}">
   {% if "DEBUG"|django_settings %}
