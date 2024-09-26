@@ -89,6 +89,7 @@
   {% endif %}
   {% endblock %}
   <link rel="stylesheet" href="{% static 'css/custom-nav.css' %}?v={{ timestamp }}">
+  <link rel="stylesheet" href="{% static 'website/css/custom-nav.css' %}?v={{ timestamp }}">
   {% block coderedcms_assets %}
   <link rel="stylesheet" href="{% static 'wagtailfontawesome/css/fontawesome.css' %}">
   {% if "DEBUG"|django_settings %}
