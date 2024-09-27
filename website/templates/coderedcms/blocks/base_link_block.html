@@ -6,11 +6,15 @@
   .dropdown-position{
     top: 70% !important;
   }
+  .activate{
+    color: #008080 !important;
+    font-weight: bolder;
+  }
 </style>
 <li class="{{liclass}} {% if has_dropdown %}dropdown{% endif %}">
   {% is_active_page page value.page as is_active_url %}
   <a href="{% block url %}#{% endblock %}" {% if value.settings.custom_id %}id="{{value.settings.custom_id}}"{% endif %}
-    class="{{aclass}} {% if has_dropdown %}dropdown-toggle{% endif %} {% if is_active_url %}active{% endif %} {{value.settings.custom_css_class}}"
+    class="{{aclass}} {% if has_dropdown %}dropdown-toggle{% endif %} {% if is_active_url %}activate{% endif %} {{value.settings.custom_css_class}}"
     {% if has_dropdown %}data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"{% endif %}
     {% if ga_event_label %}data-ga-event-label="{{ ga_event_label }}"{% endif %}
     {% if ga_event_category %}data-ga-event-category="{{ ga_event_category }}"{% endif %}>
