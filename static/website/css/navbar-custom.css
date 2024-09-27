@@ -1,41 +1,16 @@
 .navbar.navbar-custom {
-  background-color: #fff;
-  color: #fff;
+  background-color: transparent !important;
+  color: #008080 !important;
 }
 
-.navbar.navbar-custom .navbar-brand {
-  color: #fff;
+.navbar-custom .navbar-brand {
+  color: #008080 !important;
 }
 
-/* Styling for the ul and li elements in the navbar */
-.navbar-custom .navbar-nav {
-  list-style-type: none;  /* Remove bullets */
-  padding-left: 0;        /* Remove left padding */
+.navbar-custom .nav-link {
+  color: #008080 !important;
 }
 
-.navbar-custom .navbar-nav .nav-item {
-  padding: 2px 5px;      /* Add some padding to each li */
-}
 
-/* Styling for the links inside the nav-items */
-.navbar-custom .navbar-nav .nav-item .nav-link {
-  color: #008080 !important;  /* Teal color for links */
-  text-decoration: none;      /* Remove underline */
-}
 
-.navbar-custom .navbar-nav .nav-item .nav-link:hover {
-  color: #008080 !important;  /* Teal color for hover */
-  background-color: #eee;     /* Background color on hover */
-}
 
-.navbar-custom .navbar-nav .nav-item .nav-link:visited {
-  color: #008080 !important;  /* Teal color for visited links */
-}
-
-.navbar-custom .form-control-sm {
-  width: 150px !important; /* Adjust the width to make the search bar smaller */
-}
-
-.navbar-custom .btn .img {
-  max-height: 25px !important; /* Ensure the logo button is appropriately sized */
-}

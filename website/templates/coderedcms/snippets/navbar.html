@@ -25,12 +25,7 @@
     text-transform: uppercase;
     color: #008080 !important;
     transition: background-color 0.3s ease, color 0.3s ease;
-    padding: 0.5rem 0.75rem !important; /* Increased padding for better hover effect */
-  }
-
-  /* Add margin to the last link to space it from the search bar */
-  .navbar-nav .nav-item:last-child .nav-link {
-    margin-right: 1rem !important; /* Space between the last link and search bar */
+    padding: 0.15rem 0.5rem !important; /* Adjusted padding for links */
   }
 
   /* Hover effect for navbar links */
@@ -86,7 +81,7 @@
     }
 
     .navbar-nav .nav-link {
-      padding: 0.75rem 1rem !important; /* Adjust padding for mobile */
+      padding: 0.50rem 0.75rem !important; /* Adjust padding */
       text-align: left;
     }
 
@@ -139,7 +134,7 @@
           {% bootstrap_field field show_label=False wrapper_class=None success_css_class=None server_side_validation=False field_class="form-control form-control-sm" %}
         {% endfor %}
         <button class="btn custom-btn-styles" type="submit" aria-label="Search">
-          <i class="fas fa-search"></i>
+          <i class="fas fa-search" style="border-radius:100%;background-color:green;color:white;padding:10px;display:include_block"></i>
         </button>
       </form>
       {% endif %}
