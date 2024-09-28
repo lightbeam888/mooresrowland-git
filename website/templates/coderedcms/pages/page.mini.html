@@ -24,6 +24,13 @@
   <div class="card-body">
     <h5 class="card-title">{{page.title}}</h5>
     <p class="card-text">{{page.body_preview}}</p>
-    <a class="card-link" href="{% pageurl page %}" title="{{page.title}}">Read more</a>
+    <style>
+      .card-link {
+        text-decoration: underline !important;
+        font-weight: 600;
+        font-size: medium;
+      }
+    </style>
+    <a class="card-link"  href="{% pageurl page %}" title="{{page.title}}">Read more</a>
   </div>
 </div>

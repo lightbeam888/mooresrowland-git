@@ -19,10 +19,22 @@
         </div>
         {% endif %}
         <div class="col-md-6">
-        <h2><a href="{% pageurl article %}">{{article.title}}</a></h2>
+        <h2><a href="{% pageurl article %} ">{{article.title}}</a></h2>
         {% if self.show_meta %}<p>by {{article.specific.seo_author}} &bull; {{article.specific.seo_published_at}}  </p>{% endif %}
         {% if self.show_captions and article.specific.caption %}<p class="lead">{{article.specific.caption}}</p>{% endif %}
-        <a href = "{% pageurl article %}" class="btn btn-outline-primary rounded" style="padding:15px 50px; font-size:18px; font-weight:bold">KEEP READING</a>
+        <style>
+          .btn-custom-style{
+            border: 2px solid #013d4a;
+            font-weight: 900;
+            color: #013d4a;
+          }
+          .btn-custom-style:hover{
+            background-color: #013d4a;
+            border: 2px solid #013d4a;
+            color: white;
+          }
+        </style>
+        <a href = "{% pageurl article %}" class="btn btn-custom-style rounded" style="padding:15px 50px; font-size:18px; font-weight:bold">KEEP READING</a>
 <!--        {% if self.show_preview_text %}<p>{{article.specific.body_preview}}</p>{% endif %}-->
         </div>
       </div>

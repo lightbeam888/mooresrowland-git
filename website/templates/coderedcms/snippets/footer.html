@@ -1,6 +1,6 @@
 {% load wagtailcore_tags coderedcms_tags %}
 {% if settings.coderedcms.LayoutSettings.site_footer %}
-<footer style="background: #1A1D3D; color: #D3D6E0;"> <!-- Original footer color used -->
+<footer style="background: #1A1D3D; color: #D3D6E0;margin-top: 25px;"> <!-- Original footer color used -->
   {% get_footers as footers %}
   {% for footer in footers %}
   <div {% if footer.custom_id %}id="{{footer.custom_id}}"{% endif %} {% if footer.custom_css_class %}class="{{footer.custom_css_class}}"{% endif %}
