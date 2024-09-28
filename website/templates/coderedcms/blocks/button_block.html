@@ -1,10 +1,26 @@
-<a href="{{self.url}}"
+<style>
+  .btn-custom {
+    background-color: #00323c !important; /* Button color */
+    color: white; /* Text color for contrast */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding for buttons */
+    border-radius: 2px !important; /* Slight rounding */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Display inline */
+  }
+
+  .btn-custom:hover {
+    background-color: #004d4d !important; /* Darker shade on hover */
+  }
+</style>
+
+<a href="{{ self.url }}"
   {% if settings.coderedcms.AnalyticsSettings.ga_track_button_clicks %}
-  data-ga-event-category='{{self.settings.ga_tracking_event_category|default:"Button"}}'
-  data-ga-event-label='{{self.settings.ga_tracking_event_label|default:self.button_title}}'
+  data-ga-event-category='{{ self.settings.ga_tracking_event_category|default:"Button" }}'
+  data-ga-event-label='{{ self.settings.ga_tracking_event_label|default:self.button_title }}'
   {% endif %}
   title="{{ self.button_title|safe }}"
-  class="btn rounded {{ self.button_style }} {{ self.button_size }} {{ self.settings.custom_css_class }}"
+  class="btn btn-custom rounded {{ self.button_style }} {{ self.button_size }} {{ self.settings.custom_css_class }}"
   {% if self.settings.custom_id %}id="{{ self.settings.custom_id }}"{% endif %}>
   {% if self.button_title %}
   {{ self.button_title|safe }}

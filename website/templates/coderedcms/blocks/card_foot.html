@@ -1,41 +1,99 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 <style>
   .card-custom-border {
-  border-radius: 50px 0 50px 0; 
-  transition: all 0.15s ease;
-  overflow: hidden;
-}
-   .custom-border {
-  border-radius: 50px 0 50px 0; 
-  transition: all 0.15s ease;
-  overflow: hidden;
-}
+    border-radius: 50px 0 50px 0; 
+    transition: all 0.15s ease;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    display: flex; /* Use flexbox for layout */
+  }
+  
+  .custom-border {
+    border-radius: 50px 0 50px 0; 
+    transition: all 0.15s ease;
+    overflow: hidden;
+    flex: 1; /* Allow image to grow */
+  }
 
-.custom-border img:hover {
-  transform: scale(1.025);
-  cursor: pointer;
-  border-radius: 0;
-}
-.card-custom-border:hover {
-  border-radius: 0 0 50px 0; 
-}
-.footer-border-radius{
-  border-radius: 0 0 50px 0; 
-}
+  .card-custom-border:hover .custom-border {
+    border-radius: 0; /* Set border-radius to 0 on card hover */
+  }
+
+  .custom-border img {
+    transition: transform 0.15s ease; /* Optional: Transition for scaling */
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .custom-border img:hover {
+    transform: scale(1.025);
+    cursor: pointer;
+  }
+
+  .card-custom-border:hover {
+    border-radius: 0 0 50px 0; 
+  }
+
+  .footer-border-radius {
+    border-radius: 0 0 50px 0; 
+  }
+
+  /* Change heading color */
+  .card-title, .card-subtitle {
+    color: #00b9b9 !important; /* Set heading color */
+  }
+  
+  /* Change paragraph color */
+  .card-text {
+    color: #575756; /* Set paragraph color */
+  }
+
+  .card-body {
+    flex: 2; /* Allow content to take more space */
+    padding: 20px; /* Add some padding */
+  }
 </style>
-<div style="min-height: 580px;" class="card card-custom-border mb-3 {{self.settings.custom_css_class}}" {% if self.settings.custom_id %}id="{{self.settings.custom_id}}"{% endif %}>
+
+<div style="min-height: 580px;" class="card card-custom-border mb-3 {{ self.settings.custom_css_class }}" {% if self.settings.custom_id %}id="{{ self.settings.custom_id }}"{% endif %}>
   {% if self.image %}
-  {% image self.image fill-800x450 format-webp as card_img %}
-  <img class="card-img-top w-100 custom-border" src="{{card_img.url}}" alt="{{card_img.title}}">
+    {% image self.image fill-800x450 format-webp as card_img %}
+    {% if card_img.url == '/media/images/Mission_Vision__Value.2e16d0ba.fill-800x450.format-webp.webp' %}
+      <div class="custom-border">
+        <img class="card-img-top" src="{{ card_img.url }}" alt="{{ card_img.title }}">
+      </div>
+      <div class="card-body">
+        {% if self.title %}
+          <h5 class="card-title">{{ self.title }}</h5>
+        {% endif %}
+        
+        {% if self.subtitle %}
+          <h6 class="card-subtitle mb-2">{{ self.subtitle }}</h6>
+        {% endif %}
+        
+        <div class="card-text">{{ self.description }}</div>
+      </div>
+    {% else %}
+      <div class="custom-border">
+        <img class="card-img-top w-100" src="{{ card_img.url }}" alt="{{ card_img.title }}">
+      </div>
+      <div class="card-body">
+        {% if self.title %}
+          <h5 class="card-title">{{ self.title }}</h5>
+        {% endif %}
+        
+        {% if self.subtitle %}
+          <h6 class="card-subtitle mb-2">{{ self.subtitle }}</h6>
+        {% endif %}
+        
+        <div class="card-text">{{ self.description }}</div>
+      </div>
+    {% endif %}
   {% endif %}
-  <div class="card-body">
-    {% if self.title %}<h5 class="card-title ">{{self.title}}</h5>{% endif %}
-    {% if self.subtitle %}<h6 class="card-subtitle mb-2 text-muted">{{self.subtitle}}</h6>{% endif %}
-    <div class="card-text">{{self.description}}</div>
-  </div>
+  
   <div class="card-footer footer-border-radius">
     {% for button in self.links %}
-    {% include_block button %}
+      {% include_block button %}
     {% endfor %}
   </div>
 </div>
