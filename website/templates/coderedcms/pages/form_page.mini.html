@@ -11,6 +11,14 @@
   {% include "coderedcms/includes/form_honeypot.html" %}
   {% endif %}
   {% endblock %}
+  <style>
+    input[type="text"], input[type="email"], input[type="tel"] {
+      width: 75% !important;
+    }
+    input[type="number"]{
+      width: 60% !important;
+    }
+  </style>
   <div class="mt-5 row">
     <div class="{{'horizontal_label_class'|bootstrap_settings}}"></div>
     <div class="{{'horizontal_field_class'|bootstrap_settings}}">

@@ -24,6 +24,17 @@
         return captcha
       }
     </script>
+
+    <style>
+      input[type="text"], input[type="email"], input[type="tel"]{
+      width: 75% !important;
+    }
+
+    input[type="number"]{
+      width: 60% !important;
+    }
+
+    </style>
   <form onsubmit="return validateForm()" class="{{ page.form_css_class }}" id="submit_form" action="{% pageurl self %}" method="POST" {% if form|is_file_form %}enctype="multipart/form-data"{% endif %}>
     {% csrf_token %}
     {% bootstrap_form form layout="horizontal" %}
