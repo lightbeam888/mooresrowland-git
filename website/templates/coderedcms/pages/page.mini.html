@@ -1,36 +1,47 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 <style>
-  .card-custom-border {
-  border-radius: 50px 0 50px 0; 
-}
-     .custom-border {
-  border-radius: 50px 0 50px 0; 
-  transition: all 0.25s ease;
-  overflow: hidden;
-}
-
-.custom-border:hover {
-  transform: scale(1.03);
-  cursor: pointer;
-  border-radius: 0;
-}
-
-</style>
-<div class="card mb-3 overflow-hidden card-custom-border">
-  {% if page.cover_image %}
-  {% image page.cover_image fill-800x450 format-webp as card_img %}
-  <img class="card-img-top w-100 custom-border" src="{{card_img.url}}" alt="{{card_img.title}}">
-  {% endif %}
-  <div class="card-body">
-    <h5 class="card-title">{{page.title}}</h5>
-    <p class="card-text">{{page.body_preview}}</p>
-    <style>
-      .card-link {
+    .card-custom-border {
+        border-radius: 50px 0 50px 0;
+        transition: border-radius 0.25s ease;
+    }
+    .custom-border {
+        border-radius: 50px 0 50px 0;
+        transition: all 0.25s ease;
+        overflow: hidden;
+    }
+    .card-custom-border:hover {
+        border-radius: 0; /* Set border radius to 0 on hover */
+    }
+    .card-custom-border:hover .custom-border {
+        border-radius: 0; /* Set the image border radius to 0 on hover */
+    }
+    .custom-border:hover {
+        transform: scale(1.03);
+        cursor: pointer;
+    }
+    .custom-border:hover img {
+        border-radius: 0; /* Ensure the image border radius is 0 on image hover */
+    }
+    .card-title {
+        color: #00b9b9 !important;
+    }
+    .card-text {
+        color: #575756 !important;
+    }
+    .card-link {
         text-decoration: underline !important;
         font-weight: 600;
         font-size: medium;
-      }
-    </style>
-    <a class="card-link"  href="{% pageurl page %}" title="{{page.title}}">Read more</a>
-  </div>
+    }
+</style>
+<div style="" class="card mb-3 overflow-hidden card-custom-border">
+    {% if page.cover_image %}
+        {% image page.cover_image fill-800x450 format-webp as card_img %}
+        <img class="card-img-top w-100 h-auto custom-border" src="{{ card_img.url }}" alt="{{ card_img.title }}">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title">{{ page.title }}</h5>
+        <p class="card-text">{{ page.body_preview }}</p>
+        <a class="card-link" href="{% pageurl page %}" title="{{ page.title }}">Read more</a>
+    </div>
 </div>
