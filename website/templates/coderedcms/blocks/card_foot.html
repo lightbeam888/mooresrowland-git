@@ -1,6 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 <style>
-  .card-custom-border {
+
+.card-custom-border {
     border-radius: 50px 0 50px 0; 
     transition: all 0.15s ease;
     overflow: hidden;
@@ -50,28 +51,53 @@
   }
 
   .card-body {
-    flex: 2; /* Allow content to take more space */
+    flex: 1; /* Content takes the remaining space */
     padding: 20px; /* Add some padding */
   }
+
+  /* Layout for the special image card */
+  .special-card-layout {
+    display: flex; /* Flex layout for the special image card */
+  }
+
+  .custom-border img:hover {
+    transform: scale(1.025);
+    cursor: pointer;
+  }
+
+  
+@media (max-width: 991px) {
+    .special-card-layout {
+        flex-direction: column !important; /* Stack the image and text on smaller screens */
+    }
+}
+
 </style>
 
-<div style="min-height: 580px;" class="card card-custom-border mb-3 {{ self.settings.custom_css_class }}" {% if self.settings.custom_id %}id="{{ self.settings.custom_id }}"{% endif %}>
+<div class="card card-custom-border mb-3 {{ self.settings.custom_css_class }}" {% if self.settings.custom_id %}id="{{ self.settings.custom_id }}"{% endif %} {% if self.image %}
+  {% image self.image fill-800x450 format-webp as card_img %}
+  {% if card_img.url != '/media/images/Mission_Vision__Value.2e16d0ba.fill-800x450.format-webp.webp' %} style="min-height: 580px;" {% endif %} 
+{% endif %}>
+  
   {% if self.image %}
     {% image self.image fill-800x450 format-webp as card_img %}
+    
     {% if card_img.url == '/media/images/Mission_Vision__Value.2e16d0ba.fill-800x450.format-webp.webp' %}
-      <div class="custom-border">
-        <img class="card-img-top" src="{{ card_img.url }}" alt="{{ card_img.title }}">
-      </div>
-      <div class="card-body">
-        {% if self.title %}
-          <h5 class="card-title">{{ self.title }}</h5>
-        {% endif %}
-        
-        {% if self.subtitle %}
-          <h6 class="card-subtitle mb-2">{{ self.subtitle }}</h6>
-        {% endif %}
-        
-        <div class="card-text">{{ self.description }}</div>
+      <div class="special-card-layout">
+        <div class="custom-border">
+          <img class="" src="{{ card_img.url }}" alt="{{ card_img.title }}">
+        </div>
+        <div class="card-body">
+          {% if self.title %}
+            <h5 class="card-title">{{ self.title }}</h5>
+          {% endif %}
+          
+          {% if self.subtitle %}
+            <h6 class="card-subtitle mb-2">{{ self.subtitle }}</h6>
+          {% endif %}
+          
+          <div class="card-text">{{ self.description }}</div>
+        </div>
       </div>
     {% else %}
       <div class="custom-border">
