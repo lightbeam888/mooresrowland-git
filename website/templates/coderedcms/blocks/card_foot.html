@@ -44,8 +44,13 @@
 
 .special-custom-border img {
     transition: transform 0.15s ease; 
+    flex: 1;
     width: 100%; /* Make the image responsive */
     height: auto; /* Maintain aspect ratio */
+}
+
+.special-card-content{
+  width: 42%;
 }
 
 .card-custom-border:hover {
@@ -96,6 +101,9 @@
     .special-card-layout {
         flex-direction: column !important; /* Stack the image and text on smaller screens */
     }
+    .special-card-content{
+    width:100%;
+    }   
 }
 
 </style>
@@ -114,16 +122,18 @@
         <div class="special-custom-border">
           <img class="special-card-border" src="{{ card_img.url }}" alt="{{ card_img.title }}">
         </div>
-        <div class="card-body">
-          {% if self.title %}
-            <h5 class="card-title">{{ self.title }}</h5>
-          {% endif %}
-          
-          {% if self.subtitle %}
+        <div class="special-card-content">
+          <div class="card-body">
+            {% if self.title %}
+            <h5 class="card-title fw-bold">{{ self.title }}</h5>
+            {% endif %}
+            
+            {% if self.subtitle %}
             <h6 class="card-subtitle mb-2">{{ self.subtitle }}</h6>
-          {% endif %}
-          
-          <div class="card-text">{{ self.description }}</div>
+            {% endif %}
+            
+            <div class="card-text">{{ self.description }}</div>
+          </div>
         </div>
       </div>
     {% else %}
@@ -144,9 +154,11 @@
     {% endif %}
   {% endif %}
   
+  {% if card_img.url != '/media/images/Mission_Vision__Value.2e16d0ba.fill-800x450.format-webp.webp' %}
   <div class="card-footer footer-border-radius">
     {% for button in self.links %}
       {% include_block button %}
     {% endfor %}
   </div>
+  {% endif %}
 </div>
