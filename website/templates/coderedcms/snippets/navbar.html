@@ -119,6 +119,8 @@
       width: 100% !important;
     }
   }
+
+
 </style>
 
 <div class="nav-container">
@@ -140,6 +142,33 @@
     </button>
 
     <!-- Navbar content -->
+     <style>
+      .login-button{
+        background-color: #008080;
+        color: white !important;
+        border-radius: 5px;
+        padding:4px 10px !important;
+        margin-left: 4px;
+        max-width: 100px !important;
+      }
+      .login-button:hover{
+        background-color: #005757 !important;
+      }
+      
+      @media (max-width:1200px) {
+        .login-button{
+        margin:15px 0px !important;
+        padding: 7px 13px !important;
+      }
+      #login-bt-container{
+        padding: 0.15rem 0.5rem !important;
+        margin: 10px 0;
+      }
+      }
+      
+      </style>
+
+
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav me-auto">
         {% if settings.coderedcms.LayoutSettings.site_navbar %}
@@ -150,7 +179,13 @@
             {% endfor %}
           {% endfor %}
         {% endif %}
+     <li id="login-bt-container">
+
+       <a href="/login" style="color: white !important;" class="login-button">Login</a>
+       
+      </li>
       </ul>
+
 
       <!-- Search bar -->
       {% if settings.coderedcms.LayoutSettings.navbar_search %}
