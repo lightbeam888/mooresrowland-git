@@ -45,6 +45,62 @@
     {% endif %}
     {% endblock %}
 
+
+    <style>
+      .container h1{
+        color : #008080 !important
+      }
+
+      #submit_form input[type="text"], input[type="email"], input[type="tel"]{
+      width: 100% !important;
+    }
+
+    #submit_form input[type="checkbox"]:active{
+      width: 100% !important;
+    }
+
+    #submit_form{
+      padding:20px !important;
+      background-color: rgb(253, 253, 253) !important;
+      border-radius: 10px !important;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+      max-width: 800px !important; 
+      margin: 0 auto !important;
+    }
+
+    #submit_form input[type="checkbox"]{
+      margin-left: -8px !important;
+    }
+
+    #submit_form button{
+      margin-top: 5px !important;
+    }
+
+    .form-check-label{
+      margin-left: 20px !important;
+    }
+
+    #submit_form label{
+     color: 
+     #008080 !important
+    }
+
+    #submit_button{
+            border: 2px solid #013d4a !important;
+            font-weight: 700!important;;
+            color: #013d4a !important;;
+            padding: 8px 15px !important;
+            margin-left: 2px !important;
+          }
+          #submit_button:hover{
+            background-color: #013d4a !important;;
+            border:2px solid #013d4a !important;;
+            color: white !important;;
+          }
+
+    </style>
+
+
     <div class="row">
       <div class="{{'horizontal_label_class'|bootstrap_settings}}"></div>
       <div class="{{'horizontal_field_class'|bootstrap_settings}}">
@@ -54,7 +110,7 @@
           data-sitekey="{{settings.website.CustomSetting.captcha}}"
           data-callback="onRecaptchaSuccess"
         ></div>
-        <button type="submit" class="btn rounded {{page.button_size}} {{page.button_style}} {{page.button_css_class}}" id="submit_button">
+        <button type="submit" class=" btn btn-custom-style rounded {{page.button_css_class}}" id="submit_button">
           {{ page.button_text }}
         </button>
       </div>
