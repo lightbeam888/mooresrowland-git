@@ -92,3 +92,6 @@ celerybeat.pid
 
 # Wagtail translation files
 *.po
+
+# ignore Sqlite db file
+db.sqlite3
