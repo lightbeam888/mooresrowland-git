@@ -182,19 +182,22 @@
         {% endif %}
      <li id="login-bt-container">
 
-       <a href="/login" style="color: white !important;" class="login-button">Login</a>
+      {% if request.user.is_authenticated %}
+      <li>Hello, {{ request.user.username }}!</li>  <!-- Display username -->
+      <li><a href="{% url 'logout' %}" style="color: white !important;" class="login-button">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}" style="color: white !important;" class="login-button">Login</a></li>
+        {% endif %}
+
+
        
       </li>
+    
+
+   
       </ul>
 
-      <ul> 
-        {% if request.user.is_authenticated %}
-            <li>Hello, {{ request.user.username }}!</li>  <!-- Display username -->
-            <li><a href="{% url 'logout' %}">Logout</a></li>
-        {% else %}
-            <li><a href="{% url 'login' %}">Login</a></li>
-        {% endif %}
-    </ul>
+
 
 
       <!-- Search bar -->
