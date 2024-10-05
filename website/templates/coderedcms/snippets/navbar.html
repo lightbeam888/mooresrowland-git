@@ -187,6 +187,15 @@
       </li>
       </ul>
 
+      <ul> 
+        {% if request.user.is_authenticated %}
+            <li>Hello, {{ request.user.username }}!</li>  <!-- Display username -->
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+    </ul>
+
 
       <!-- Search bar -->
       {% if settings.coderedcms.LayoutSettings.navbar_search %}
