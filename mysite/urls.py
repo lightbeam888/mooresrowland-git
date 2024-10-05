@@ -8,6 +8,8 @@ from coderedcms import urls as crx_urls
 from django.views.generic import TemplateView
 from wagtail.contrib.sitemaps.views import sitemap
 from django.conf.urls.i18n import i18n_patterns
+from django.contrib.auth.views import LoginView, LogoutView
+
 
 urlpatterns = [
     # Admin
@@ -17,6 +19,9 @@ urlpatterns = [
     path("admin/", include(crx_admin_urls)),
     # Documents
     path("docs/", include(wagtaildocs_urls)),
+    path('login/', LoginView.as_view(template_name='coderedcms/pages/login.html'), name='login'),
+
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]
 
 urlpatterns = urlpatterns + i18n_patterns(

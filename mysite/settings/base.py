@@ -173,8 +173,11 @@ MEDIA_URL = "/media/"
 
 # Login
 
-LOGIN_URL = "wagtailadmin_login"
-LOGIN_REDIRECT_URL = "wagtailadmin_home"
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
+
 
 # Wagtail settings
 

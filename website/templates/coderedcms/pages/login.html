@@ -1,0 +1,33 @@
+{% extends "coderedcms/pages/base.html" %}
+
+{% block content %}
+    <div class="login-container">
+        <h2>Login to Your Account</h2>
+        
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username or Email:</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            
+            <button type="submit">Login</button>
+        </form>
+
+        {% if form.errors %}
+            <div class="error-messages">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        <li>{{ field }}: {{ errors|join:", " }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+    </div>
+{% endblock %}
