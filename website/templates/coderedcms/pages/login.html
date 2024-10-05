@@ -98,21 +98,25 @@
 
         /* Login Button */
         #login-button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            background-color: #3498db;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #008080 !important; /* Updated button color */
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-        /* Button Hover State */
-        #login-button:hover {
-            background-color: #2980b9;
-        }
+/* Button Hover State */
+#login-button:hover {
+    background-color: #034747 !important; /* A slightly darker shade for hover effect */
+}
+#login-button:active {
+    transform: scale(0.95); /* Slightly reduce size on click */
+}
 
         /* Error Messages */
         .error-messages {
