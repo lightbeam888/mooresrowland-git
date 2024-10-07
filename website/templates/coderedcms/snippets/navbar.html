@@ -158,12 +158,12 @@
       
       @media (max-width:1200px) {
         .login-button{
-        margin:15px 0px !important;
+        margin:10px 0px !important;
         padding: 7px 13px !important;
       }
       #login-bt-container{
-        padding: 0.15rem 0.5rem !important;
-        margin: 10px 0;
+        padding: 0.15rem 1rem !important;
+        margin: 00px 0;
       }
       }
       
@@ -180,12 +180,20 @@
             {% endfor %}
           {% endfor %}
         {% endif %}
-     <li id="login-bt-container">
 
-       <a href="/login" style="color: white !important;" class="login-button">Login</a>
-       
-      </li>
+      {% if request.user.is_authenticated %}
+      <li>Hello, {{ request.user.username }}!</li>  <!-- Display username -->
+      <li style="padding-left: 0.75rem;"><a href="{% url 'logout' %}" style="color: white !important;" class="login-button">Logout</a></li>
+        {% else %}
+            <li style="padding-left: 0.75rem;"><a href="{% url 'login' %}" style="color: white !important;" class="login-button">Login</a></li>
+        {% endif %}
+
+
+
+   
       </ul>
+
+
 
 
       <!-- Search bar -->

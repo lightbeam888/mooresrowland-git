@@ -1,0 +1,201 @@
+{% extends "coderedcms/pages/base.html" %}
+
+{% block navbar %}
+{% include "coderedcms/snippets/navbar.html" %}
+{% endblock %}
+
+{% block content %}
+    <style>
+        /* General Page Styling */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+            overflow: hidden; /* Prevent overflow */
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            position: relative; /* To position the overlay */
+            background-image: url('https://www.eutelsat.com/files/Background/banner-enterprise.jpg'); /* Image from the specified URL */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Overlay for Image */
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better contrast */
+            z-index: 0; /* Below the login box */
+        }
+
+        /* Login Form Container */
+        .login-container {
+            flex: 1; /* Take up equal space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative; /* For proper stacking */
+            z-index: 1; /* Above the overlay */
+        }
+
+        /* Login Box */
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        /* Title */
+        .login-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #008080 !important;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        /* Form Group */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        /* Label */
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        /* Input Fields */
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Input Focus State */
+        .form-group input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        /* Login Button */
+        #login-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #008080 !important; /* Updated button color */
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Button Hover State */
+#login-button:hover {
+    background-color: #034747 !important; /* A slightly darker shade for hover effect */
+}
+#login-button:active {
+    transform: scale(0.95); /* Slightly reduce size on click */
+}
+
+        /* Error Messages */
+        .error-messages {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        /* Error List */
+        .error-messages ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .error-messages li {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .login-box {
+                padding: 20px;
+            }
+            /* Stack layout for small screens */
+            .main-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+
+    <div class="main-container">
+        <div class="image-overlay"></div> <!-- Dark overlay for better contrast -->
+
+        <!-- Login Form Container -->
+        <div class="login-container">
+            <div class="login-box">
+                <!-- Login Form Title -->
+                <h2 class="login-title">Login</h2>
+   
+                <!-- Login Form -->
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    
+                    <!-- Username Field -->
+                    <div class="form-group">
+                        <label for="username">Username or Email</label>
+                        <input type="text" name="username" id="username" required>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" required>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit" id="login-button">Login</button>
+                </form>
+
+                <!-- Error Messages -->
+                {% if form.errors %}
+                    <div class="error-messages">
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                                <li><strong>{{ field }}:</strong> {{ errors|join:", " }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include "coderedcms/snippets/footer.html" %}
+{% endblock %}
