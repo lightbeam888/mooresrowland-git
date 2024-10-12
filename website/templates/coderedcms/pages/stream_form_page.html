@@ -17,7 +17,7 @@
   <br>
   {% endif %}
   {% endblock %}
-
+  
   {% block stream_form %}
   <form class="stream-form {{ page.form_css_class }}" id="{{ page.form_id }}" action="{% pageurl self %}" method="POST" {% if form|is_file_form %}enctype="multipart/form-data"{% endif %}>
     {% csrf_token %}

@@ -20,7 +20,7 @@ def contact_form_signal(sender, instance, created, **kwargs):
         form_data = instance.form_data
         for field, value in form_data.items():
             message += f"<strong>{field.capitalize()}</strong>: {value}<br>"
-
+    
         from_email = setting.email_sender
         to_email = setting.owner_mail
 

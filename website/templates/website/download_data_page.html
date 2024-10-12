@@ -2,15 +2,90 @@
 {% load wagtailcore_tags coderedcms_tags %}
 
 {% block content %}
-<div class="container">
-    <h1>{{ page.title }}</h1>
-    {{ page.intro|richtext }}
+<!-- Include Navbar -->
+{% include 'coderedcms/snippets/navbar.html' %}
 
-    <h2>Download Documents</h2>
-    <ul>
-    {% for document in documents %}
-        <li><a href="{{ document.url }}">{{ document.title }}</a></li>
-    {% endfor %}
-    </ul>
+<div class="container my-5">
+
+    <div class="text-center mb-4">
+        <h1 class="display-4">{{ page.title }}</h1>
+        <p class="lead">{{ page.intro|richtext }}</p>
+    </div>
+    
+    <section>
+        <div class="card shadow-sm border-0 mb-5">
+            <div class="card-body">
+                <h2 class="h4 mb-4 text-primary">Download Documents</h2>
+                <ul class="list-group">
+                    {% for document in documents %}
+                        <li class="list-group-item">
+                            <a href="{{ document.url }}" class="text-decoration-none d-flex align-items-center">
+                                <i class="bi bi-file-earmark-text-fill"></i> {{ document.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
 </div>
+
+{% include 'coderedcms/snippets/footer.html' %}
+
+<style>
+    
+    h1.display-4 {
+        font-weight: 700;
+        color: #343a40;
+    }
+
+    p.lead {
+        color: #6c757d;
+        font-size: 1.25rem;
+    }
+
+    
+    .card {
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    
+    .list-group-item {
+        font-size: 1.1rem;
+        padding: 15px 20px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    
+    .list-group-item:hover {
+        background-color: #f0f8ff; 
+        transform: scale(1.02); 
+    }
+
+
+    .list-group-item a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .list-group-item a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+
+    .list-group-item a i {
+        margin-right: 8px;
+        color: #007bff;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .list-group-item a:hover i {
+        color: #0056b3; 
+    }
+</style>
+
 {% endblock %}
