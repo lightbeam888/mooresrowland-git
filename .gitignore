@@ -94,4 +94,3 @@ celerybeat.pid
 *.po
 
 # ignore Sqlite db file
-db.sqlite3

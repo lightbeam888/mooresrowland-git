@@ -5,6 +5,7 @@ Create or customize your page models here.
 from coderedcms.blocks import NAVIGATION_STREAMBLOCKS, BaseBlock
 from coderedcms.fields import CoderedStreamField
 from django.db import models
+from django.shortcuts import redirect, render
 from modelcluster.fields import ParentalKey
 from coderedcms.forms import CoderedFormField
 from coderedcms.models import (
@@ -27,6 +28,11 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.models import Image
 
 from website.blocks import CUSTOM_CONTENT_STREAMBLOCKS, CUSTOM_LAYOUT_STREAMBLOCKS
+from django.db import models
+from coderedcms.models import CoderedPage
+from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.documents.models import Document
+from .forms import DocumentUploadForm
 
 
 class ArticlePage(CoderedArticlePage):
@@ -407,3 +413,51 @@ class NavbarSettings(BaseSetting):
     panels = [
         FieldPanel('navbar_transparent'),
     ]
+
+
+class DocumentManagementPage(CoderedPage):
+    """
+    A page type for managing documents.
+    """
+    template = 'website/document_management_page.html'
+
+    # Add any additional fields you need
+    intro = models.TextField(blank=True)
+
+    content_panels = CoderedPage.content_panels + [
+        FieldPanel('intro'),
+    ]
+
+    class Meta:
+        verbose_name = "Document Management Page"
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['documents'] = Document.objects.all()
+        return context
+
+
+    def serve(self, request):
+        if request.method == 'POST':
+            form = DocumentUploadForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect(self.url)
+        else:
+            form = DocumentUploadForm()
+        
+        context = self.get_context(request)
+        context['form'] = form
+        return render(request, self.template, context)
+
+
+# training data page inherits from Documentmanagement Page
+
+class DownloadDataPage(DocumentManagementPage):
+    """
+    A page for downloading documents only.
+    """
+    template = 'website/download_data_page.html'
+
+    class Meta:
+        verbose_name = "Download Data Page"

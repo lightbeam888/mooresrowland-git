@@ -1,0 +1,16 @@
+{% extends "coderedcms/pages/base.html" %}
+{% load wagtailcore_tags coderedcms_tags %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ page.title }}</h1>
+    {{ page.intro|richtext }}
+
+    <h2>Download Documents</h2>
+    <ul>
+    {% for document in documents %}
+        <li><a href="{{ document.url }}">{{ document.title }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
