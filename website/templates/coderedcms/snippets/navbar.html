@@ -161,7 +161,7 @@
         color: white !important;
         display: flex;
         border-radius: 5px;
-        padding:4px 5px !important;
+        padding: 7px 13px !important;
         margin-left: 4px;
         max-width: 100px !important;
         cursor: pointer;
@@ -201,7 +201,7 @@
         {% endif %}
 
       {% if request.user.is_authenticated %}
-      <li style="font-size: small;padding-left: 0.75rem;margin-bottom: 5px;margin-top: 5px;">Hello, {{ request.user.username }}!</li>  <!-- Display username -->
+      <li style="font-size: small;padding-left: 0.75rem;margin-bottom: 5px;margin-top: 5px;max-width: 165px;">Hello, {{ request.user.username }}!</li>  <!-- Display username -->
       <li style="padding-left: 0.75rem;"><a href="{% url 'logout' %}" style="color: white !important;" class="logout-button">Logout</a></li>
         {% else %}
             <li style="padding-left: 0.75rem;"><a href="{% url 'login' %}" style="color: white !important;" class="login-button">Login</a></li>
