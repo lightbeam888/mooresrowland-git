@@ -155,9 +155,28 @@
       .login-button:hover{
         background-color: #005757 !important;
       }
+
+      .logout-button{
+        background-color: rgb(218, 13, 13);
+        color: white !important;
+        display: flex;
+        border-radius: 5px;
+        padding:4px 5px !important;
+        margin-left: 4px;
+        max-width: 100px !important;
+        cursor: pointer;
+      }
+
+      .logout-button:hover{
+        background-color: rgb(165, 24, 24);
+      }
       
       @media (max-width:1200px) {
         .login-button{
+        margin:10px 0px !important;
+        padding: 7px 13px !important;
+      }
+      .logout-button{
         margin:10px 0px !important;
         padding: 7px 13px !important;
       }
@@ -171,7 +190,7 @@
 
 
     <div class="collapse navbar-collapse" id="navbar">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav me-auto d-md-flex align-items-md-center">
         {% if settings.coderedcms.LayoutSettings.site_navbar %}
           {% get_navbartrans as navbars %}
           {% for navbar in navbars %}
@@ -182,8 +201,8 @@
         {% endif %}
 
       {% if request.user.is_authenticated %}
-      <li>Hello, {{ request.user.username }}!</li>  <!-- Display username -->
-      <li style="padding-left: 0.75rem;"><a href="{% url 'logout' %}" style="color: white !important;" class="login-button">Logout</a></li>
+      <li style="font-size: small;padding-left: 0.75rem;margin-bottom: 5px;margin-top: 5px;">Hello, {{ request.user.username }}!</li>  <!-- Display username -->
+      <li style="padding-left: 0.75rem;"><a href="{% url 'logout' %}" style="color: white !important;" class="logout-button">Logout</a></li>
         {% else %}
             <li style="padding-left: 0.75rem;"><a href="{% url 'login' %}" style="color: white !important;" class="login-button">Login</a></li>
         {% endif %}
