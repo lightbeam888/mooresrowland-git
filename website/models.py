@@ -33,6 +33,7 @@ from coderedcms.models import CoderedPage
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.documents.models import Document
 from .forms import DocumentUploadForm
+import pdb
 
 
 class ArticlePage(CoderedArticlePage):
@@ -461,7 +462,6 @@ class DownloadDataPage(DocumentManagementPage):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['is_member'] = request.user.groups.filter(name='Members').exists()
         return context
 
     class Meta:

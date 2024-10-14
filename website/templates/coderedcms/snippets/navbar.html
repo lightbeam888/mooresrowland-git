@@ -199,12 +199,9 @@
             {% for item in navbar.menu_items %}
               {% if item.value.display_text == 'Training Material' %}
                 {% if request.user.is_authenticated %}
-                  {% if is_member %}
+                  {% if request.user.groups.values.first.name == 'Members' %}
                     {% include_block item with liclass="nav-item" aclass="nav-link" ga_event_category="Navbar" %}
                   {% else %}
-                  <li class="nav-item">
-                    <a href="#" class="nav-link disabled" title="Members only">TRAINING MATERIAL</a>
-                  </li>
                   {% endif %}
                 {% endif %}
               {% else %}
