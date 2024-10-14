@@ -459,5 +459,10 @@ class DownloadDataPage(DocumentManagementPage):
     """
     template = 'website/download_data_page.html'
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['is_member'] = request.user.groups.filter(name='Members').exists()
+        return context
+
     class Meta:
         verbose_name = "Download Data Page"

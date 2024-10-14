@@ -123,6 +123,8 @@
 
 </style>
 
+{% load debug_tags %}
+
 <div class="nav-container">
 <nav class="navbar navbar-expand-xl navbar-custom">
   <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -185,7 +187,7 @@
         margin: 00px 0;
       }
       }
-      
+
       </style>
 
 
@@ -195,13 +197,25 @@
           {% get_navbartrans as navbars %}
           {% for navbar in navbars %}
             {% for item in navbar.menu_items %}
-              {% include_block item with liclass="nav-item" aclass="nav-link" ga_event_category="Navbar" %}
+              {% if item.value.display_text == 'Training Material' %}
+                {% if request.user.is_authenticated %}
+                  {% if is_member %}
+                    {% include_block item with liclass="nav-item" aclass="nav-link" ga_event_category="Navbar" %}
+                  {% else %}
+                  <li class="nav-item">
+                    <a href="#" class="nav-link disabled" title="Members only">TRAINING MATERIAL</a>
+                  </li>
+                  {% endif %}
+                {% endif %}
+              {% else %}
+                {% include_block item with liclass="nav-item" aclass="nav-link" ga_event_category="Navbar" %}
+              {% endif %}
             {% endfor %}
           {% endfor %}
         {% endif %}
 
       {% if request.user.is_authenticated %}
-      <li style="font-size: small;padding-left: 0.75rem;margin-bottom: 5px;margin-top: 5px;max-width: 165px;">Hello, {{ request.user.username }}!</li>  <!-- Display username -->
+      <!-- <li style="font-size: small;padding-left: 0.75rem;margin-bottom: 5px;margin-top: 5px;max-width: 165px;">Hello, {{ request.user.username }}!</li> -->
       <li style="padding-left: 0.75rem;"><a href="{% url 'logout' %}" style="color: white !important;" class="logout-button">Logout</a></li>
         {% else %}
             <li style="padding-left: 0.75rem;"><a href="{% url 'login' %}" style="color: white !important;" class="login-button">Login</a></li>
