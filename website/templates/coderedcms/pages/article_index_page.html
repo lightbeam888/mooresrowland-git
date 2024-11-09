@@ -23,18 +23,30 @@
         {% if self.show_meta %}<p>by {{article.specific.seo_author}} &bull; {{article.specific.seo_published_at}}  </p>{% endif %}
         {% if self.show_captions and article.specific.caption %}<p class="lead">{{article.specific.caption}}</p>{% endif %}
         <style>
-          .btn-custom-style{
-            border: 2px solid #013d4a;
-            font-weight: 900;
-            color: #013d4a;
-          }
-          .btn-custom-style:hover{
-            background-color: #013d4a;
-            border: 2px solid #013d4a;
-            color: white;
-          }
+          /* Default button style */
+.btn-custom-style {
+  background-color: #353795;
+  color: white;
+  padding: 15px 50px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover effect */
+.btn-custom-style:hover {
+  background-color: #2b2c6b; /* Darker shade for hover */
+  color: #e0e0e0; /* Slightly lighter text color */
+}
+
         </style>
-        <a href = "{% pageurl article %}" class="btn btn-custom-style rounded" style="padding:15px 50px; font-size:18px; font-weight:bold">KEEP READING</a>
+        <a href="{% pageurl article %}" 
+        class="btn btn-custom-style rounded" 
+        style="padding:15px 50px; font-size:18px; font-weight:bold; background-color: #353795; color: white;">
+       KEEP READING
+     </a>
 <!--        {% if self.show_preview_text %}<p>{{article.specific.body_preview}}</p>{% endif %}-->
         </div>
       </div>
